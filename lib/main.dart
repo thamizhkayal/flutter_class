@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_class/task3/task3.dart';
 import 'package:flutter_class/task_2/task2.dart';
 
 import 'counter_app/counter_app.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CounterApp(),
+      home: Task3(),
       // home: Tsk1(),
     );
   }
