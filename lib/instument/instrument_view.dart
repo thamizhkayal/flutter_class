@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_class/product_widgets/my_appbar.dart';
+import 'package:flutter_class/provider/product_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -9,9 +12,14 @@ class InstrumentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pp = Provider.of<ProductProvider>(context);
     Size s = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.grey,
+      appBar: PreferredSize(
+        child: MyAppbar(),
+        preferredSize: Size(0, 40),
+      ),
       body: SizedBox(
         width: s.width,
         child: Column(
@@ -40,7 +48,12 @@ class InstrumentView extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            ReadMoreText(
+            TextButton(
+                onPressed: () {
+                  pp.addToCart();
+                },
+                child: Text('Add to cart')),
+            const ReadMoreText(
               'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
               trimLines: 2,
               colorClickableText: Colors.pink,

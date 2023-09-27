@@ -39,6 +39,7 @@ dependencies:
   dotted_border: ^2.0.0+3
   velocity_x: ^4.1.1
   readmore: ^2.2.0
+  provider: ^6.0.5
 
 
 

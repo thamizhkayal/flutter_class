@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_class/task3/task3.dart';
 import 'package:flutter_class/task_2/task2.dart';
+import 'package:provider/provider.dart';
 
 import 'MyButtons/my_buttons.dart';
 import 'counter_app/counter_app.dart';
 import 'instument/instrument_list.dart';
+import 'provider/product_provider.dart';
 import 'task_1/tsk1.dart';
 import 'widgets/list_view/my_list_view.dart';
 
@@ -18,10 +20,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: InstrumentList(),
-      // home: Tsk1(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ProductProvider()),
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: InstrumentList(),
+        // home: Tsk1(),
+      ),
     );
   }
 }
