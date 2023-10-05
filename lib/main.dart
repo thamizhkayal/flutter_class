@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_class/task3/task3.dart';
 import 'package:flutter_class/task_2/task2.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import 'MyButtons/my_buttons.dart';
+import 'THAMZHHD/screen/home/home.dart';
 import 'counter_app/counter_app.dart';
 import 'instument/instrument_list.dart';
 import 'provider/product_provider.dart';
@@ -24,11 +26,16 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => ProductProvider()),
       ],
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: InstrumentList(),
-        // home: Tsk1(),
-      ),
+      child: ScreenUtilInit(
+          designSize: const Size(375, 812),
+          minTextAdapt: true,
+          builder: (_, child) {
+            return const MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: Home(),
+              // home: Tsk1(),
+            );
+          }),
     );
   }
 }
