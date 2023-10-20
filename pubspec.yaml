@@ -43,6 +43,10 @@ dependencies:
   flutter_screenutil: ^5.9.0
   get_storage: ^2.1.1
   get: ^4.6.6
+  firebase_core: ^2.18.0
+  firebase_auth: ^4.11.0
+  cloud_firestore: ^4.10.0
+  grouped_list: ^5.1.2
 
 
 
