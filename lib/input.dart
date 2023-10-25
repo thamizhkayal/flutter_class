@@ -1,12 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class MyInputs extends StatelessWidget {
+class MyInputs extends StatefulWidget {
   MyInputs({super.key});
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController passController = TextEditingController();
-  final fs = FirebaseFirestore.instance;
 
+  @override
+  State<MyInputs> createState() => _MyInputsState();
+}
+
+class _MyInputsState extends State<MyInputs> {
+  final TextEditingController nameController = TextEditingController();
+
+  final TextEditingController emailController = TextEditingController();
+
+  final fs = FirebaseFirestore.instance;
+  Map<String, dynamic> userData = {};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,10 +28,10 @@ class MyInputs extends StatelessWidget {
               decoration: InputDecoration(hintText: 'User Name'),
             ),
             TextField(
-              controller: passController,
-              decoration: InputDecoration(hintText: 'Password'),
+              controller: emailController,
+              decoration: InputDecoration(hintText: 'Email'),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Container(
@@ -33,31 +41,28 @@ class MyInputs extends StatelessWidget {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Map<String, dynamic> userData = {
-                        "username": nameController.text,
-                        "password": passController.text
-                      };
-                      print(userData);
-
-                      // fs.collection("users").add(userData);
-                      fs
-                          .collection('users')
-                          .doc(nameController.text)
-                          .set(userData);
+                      fs.collection("User").doc("8015122373").set({
+                        "name": nameController.text,
+                        "age": 25,
+                        "email": emailController.text
+                      });
                     },
                     child: Text("Add Data"),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   TextButton(
                     onPressed: () async {
-                      final res = await fs
-                          .collection('users')
-                          .doc('W5SlzGa9LEad0gN6JELY')
-                          .get();
+                      final res =
+                          await fs.collection("User").doc("8015122373").get();
                       print(res.id);
+                      print(res.exists);
                       print(res.data());
+                      if (res.exists) {
+                        userData = res.data() ?? {};
+                        setState(() {});
+                      }
                     },
                     child: Text("Get Data"),
                   ),
@@ -67,7 +72,11 @@ class MyInputs extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
-            ListTile()
+            ListTile(
+                title: Text("${userData['name']}"), subtitle: Text("name")),
+            ListTile(
+                title: Text("${userData['email']}"), subtitle: Text("email")),
+            ListTile(title: Text("${userData['age']}"), subtitle: Text("age")),
           ],
         ),
       )),
