@@ -14,7 +14,9 @@ import 'counter_app/counter_app.dart';
 import 'firebase_options.dart';
 import 'input.dart';
 import 'instument/instrument_list.dart';
+import 'provider/data_provider.dart';
 import 'provider/product_provider.dart';
+import 'screen/pages/add_data_page.dart';
 import 'task_1/tsk1.dart';
 import 'thamizh_practice/grouped_list_practice.dart';
 import 'widgets/list_view/my_list_view.dart';
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ProductProvider()),
+        ChangeNotifierProvider(create: (context) => DataProvider()),
       ],
       child: ScreenUtilInit(
           designSize: const Size(375, 812),
@@ -44,7 +47,7 @@ class MyApp extends StatelessWidget {
           builder: (_, child) {
             return GetMaterialApp(
               debugShowCheckedModeBanner: false,
-              home: MyInputs(),
+              home: AddDataPage(),
               // home: Tsk1(),
             );
           }),
