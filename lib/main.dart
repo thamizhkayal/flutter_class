@@ -14,6 +14,7 @@ import 'counter_app/counter_app.dart';
 import 'firebase_options.dart';
 import 'input.dart';
 import 'instument/instrument_list.dart';
+import 'overlay_models/overlay_models.dart';
 import 'provider/data_provider.dart';
 import 'provider/product_provider.dart';
 import 'screen/pages/add_data_page.dart';
@@ -42,15 +43,17 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => DataProvider()),
       ],
       child: ScreenUtilInit(
-          designSize: const Size(375, 812),
-          minTextAdapt: true,
-          builder: (_, child) {
-            return GetMaterialApp(
-              debugShowCheckedModeBanner: false,
-              home: AddDataPage(),
-              // home: Tsk1(),
-            );
-          }),
+        designSize: const Size(375, 812),
+        minTextAdapt: true,
+        builder: (_, child) {
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: child,
+            // home: Tsk1(),
+          );
+        },
+        child: OverlayModels(),
+      ),
     );
   }
 }
